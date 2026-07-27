@@ -1,1 +1,10 @@
 *.class
+# VS Code temporary Code Runner files
+tempCodeRunnerFile.*
+
+# VS Code settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

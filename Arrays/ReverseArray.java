@@ -18,17 +18,27 @@ public class ReverseArray {
         }
         System.out.println();
 
-        // Reversing the array in-place
-        //Naive Approach -> creeating another temporary array of same and storing the reverse version and then copying it back to original array
+        // //Naive Approach -> creeating another temporary array of same and storing the reverse version and then copying it back to original array
+        // //TC -> O(n) Auxillary space->O(n)
 
-        int[] temp = new int[n];
-        //storing the reverse of arr in temp
-        for(int i=0;i<n;i++){
-            temp[i]=arr[n-i-1];
-        }
-        // Copying the reversed elements back to the original array
-        for(int i=0;i<n;i++){
-            arr[i] = temp[i];
+        // int[] temp = new int[n];
+        // //storing the reverse of arr in temp
+        // for(int i=0;i<n;i++){
+        //     temp[i]=arr[n-i-1];
+        // }
+        // // Copying the reversed elements back to the original array
+        // for(int i=0;i<n;i++){
+        //     arr[i] = temp[i];
+        // }
+
+        //Optimized Approach -> Swapping the elements from start and end of the array
+        //Reversing the array in place
+        //TC -> O(n) Auxillary space->O(1)
+
+        for(int i=0;i<n/2;i++){
+            int temp = arr[n-i-1];
+            arr[n-i-1] = arr[i];
+            arr[i] = temp;
         }
 
         System.out.print("The Reversed array is:\n ");
