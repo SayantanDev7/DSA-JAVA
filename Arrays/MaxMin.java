@@ -28,7 +28,7 @@ public class MaxMin{
             }
         }
         //storing the masx and min in an array and returning it
-        int[] result = new int[2];
+        int[] result = new int[2]; //it takes O(1) space as we are using a constant amount of extra space
         result[0] = min;
         result[1] = max;
         return result;
@@ -44,3 +44,5 @@ public class MaxMin{
 
 
 }
+
+//to make it more optimzed we have to use pairwise comparison method which will reduce the number of comparisons to 3n/2 - 2 for n elements in the array.
