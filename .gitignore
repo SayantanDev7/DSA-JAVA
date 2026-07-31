@@ -8,3 +8,11 @@ tempCodeRunnerFile.*
 # OS files
 .DS_Store
 Thumbs.db
+# Compiled classes
+out/
+
+# Module file
+*.iml
+
+# IntelliJ
+.idea/

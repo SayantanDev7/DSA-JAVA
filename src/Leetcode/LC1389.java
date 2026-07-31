@@ -7,7 +7,7 @@
 
 // It is guaranteed that the insertion operations will be valid.
 
- 
+
 
 // Example 1:
 
@@ -21,30 +21,30 @@
 // 3            2        [0,1,3,2]
 // 4            1        [0,4,1,3,2]
 
-class Solution {
+public class LC1389 {
     public int[] createTargetArray(int[] nums, int[] index) {
         int[] target = new int[nums.length];
         for(int i=0;i<index.length;i++){
-           //need to right shift the elements from index[i] to the end of the array if target[index[i]] is already occupied
-           //start from i as i is always >= index[i] and go till index[i] and shift the elements to the right by 1
+            //need to right shift the elements from index[i] to the end of the array if target[index[i]] is already occupied
+            //start from i as i is always >= index[i] and go till index[i] and shift the elements to the right by 1
             for(int j=i;j>index[i];j--){
-                    target[j] = target[j-1];
+                target[j] = target[j-1];
             }
-            
+
             target[index[i]] = nums[i];
         }
         return target;
     }
     public static void main(String[] args) {
-       int[] nums = {0,1,2,3,4};
-       int[] index = {0,1,2,2,1};
-       Solution sol = new Solution();
-       int[] result = sol.createTargetArray(nums, index);
-       System.out.print("Output: ");
-       for (int val : result) {
-           System.out.print(val + " ");
-       }
-       System.out.println();
+        int[] nums = {0,1,2,3,4};
+        int[] index = {0,1,2,2,1};
+        LC1389 sol = new LC1389();
+        int[] result = sol.createTargetArray(nums, index);
+        System.out.print("Output: ");
+        for (int val : result) {
+            System.out.print(val + " ");
+        }
+        System.out.println();
     }
 
 }
