@@ -31,3 +31,5 @@ public class UniqueIntSumZero {
         }
 
 }
+//TC : O(n) for loop interating upto  given integer
+//    SC : O(n) due to auxillary space of newly created resutant array
