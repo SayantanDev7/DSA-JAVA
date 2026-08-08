@@ -41,8 +41,30 @@ public class MinStack {
 
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
+        MinStack st = new MinStack();
+
+
         System.out.println("Enter the size of the Stack: ");
         int n = sc.nextInt();
+
+        System.out.println("Enter the elements in the stack: ");
+        for(int i=0;i<n;i++){
+            int value = sc.nextInt();
+            st.push(value);
+        }
+
+        System.out.println("\nStack: " + st.stack);
+        System.out.println("Min Stack: " + st.minStack);
+
+        System.out.println("Top element: " + st.top());
+        System.out.println("Minimum element: " + st.getMin());
+
+        // Pop one element
+        System.out.println("\nAfter popping:");
+        st.pop();
+
+        System.out.println("Stack: " + st.stack);
+        System.out.println("Minimum element: " + st.getMin());
 
 
 
