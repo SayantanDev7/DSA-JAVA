@@ -1,5 +1,6 @@
 package Stack;
 
+import java.util.Scanner;
 import java.util.Stack;
 
 public class MinStack {
@@ -35,5 +36,16 @@ public class MinStack {
         //we need to solve this in O(1) TC
         //if we traverse the stack and use Math.min then in WC its O(n)
         return minStack.peek();
+    }
+
+
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the size of the Stack: ");
+        int n = sc.nextInt();
+
+
+
+        sc.close();
     }
 }
