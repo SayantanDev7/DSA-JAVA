@@ -39,5 +39,5 @@ public class Evaluate_ReversePolish {
     }
 }
 
-//TC -> O(n)
-//    SC -> O(n)
+//TC -> O(n) traversing the string in worst case size n
+//    SC -> O(n) using auxillary space which is another stack
