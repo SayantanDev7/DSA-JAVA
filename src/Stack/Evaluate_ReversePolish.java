@@ -38,3 +38,6 @@ public class Evaluate_ReversePolish {
         return st.peek();
     }
 }
+
+//TC -> O(n)
+//    SC -> O(n)
