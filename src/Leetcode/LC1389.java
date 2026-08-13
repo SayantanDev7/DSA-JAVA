@@ -23,14 +23,18 @@
 
 public class LC1389 {
     public int[] createTargetArray(int[] nums, int[] index) {
-        int[] target = new int[nums.length];
-        for(int i=0;i<index.length;i++){
-            //need to right shift the elements from index[i] to the end of the array if target[index[i]] is already occupied
-            //start from i as i is always >= index[i] and go till index[i] and shift the elements to the right by 1
+        int n = nums.length;
+        //1.Created a target array of same size as of nums
+        int[] target = new int[n];
+        //2.outer loop for traversing both the arrays nums and index
+        for(int i=0;i<n;i++){
+            //3.before placing nums[i] at target[index[i]] creating space by shifting existing elements one position to the right.
+            //from i down to index[i]
             for(int j=i;j>index[i];j--){
+                //4.Start from the rightmost occupied position and move toward the insertion position.
                 target[j] = target[j-1];
             }
-
+            //placing the new element into the position that was freed by the shift.
             target[index[i]] = nums[i];
         }
         return target;
