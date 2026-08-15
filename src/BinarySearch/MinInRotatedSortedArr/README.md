@@ -1,157 +1,101 @@
-LeetCode 153 — Find Minimum in Rotated Sorted Array
-Understand Problem
 
-Given a sorted array of unique elements that has been rotated, find the minimum element.
+# **LeetCode 153 — Find Minimum in Rotated Sorted Array**
 
-Example:
+---
 
-Original: [1,2,3,4,5,6,7]
-Rotated:  [4,5,6,7,1,2,3]
+## 📌 1. Understand Problem
+
+Given a sorted array of unique integers that has been rotated at an unknown pivot, find the minimum element in **$O(\log n)$** time complexity.
+
+```text
+Original: [1, 2, 3, 4, 5, 6, 7]
+Rotated:  [4, 5, 6, 7, 1, 2, 3]
+
+Input:  nums = [4, 5, 6, 7, 1, 2, 3]
+Output: 1
+
+```
 
 
-Answer = 1
 
-The goal is to solve it in O(log n).
 
-Naive Approach
 
-Traverse the entire array and keep track of the minimum:
+## 🐢 2. Naive Approach
 
+* **Idea:** Iterate through the array linearly and maintain the minimum element seen so far.
+* **Code:**
+
+```java
 int min = nums[0];
-
-
-for(int i = 1; i < nums.length; i++){
-min = Math.min(min, nums[i]);
+for (int i = 1; i < nums.length; i++) {
+    min = Math.min(min, nums[i]);
 }
-Complexity
-TC → O(n)
-SC → O(1)
 
-This works, but doesn't satisfy the required O(log n) time.
+```
 
-Optimize Logic
+* **Limitation:** Takes $O(n)$ time complexity, which violates the strict $O(\log n)$ problem requirement.
 
-Use Binary Search.
+---
 
-The key observation:
+## ⚡ 3. Optimize (Binary Search on Rotation Point)
 
-The array has only one rotation point, and the minimum is exactly at/after this point.
+* **Core Insight:** The array has a single inflection/rotation point where the drop occurs. The minimum element lies precisely at or immediately after this rotation point.
+* **Strategy:**
 
-At every step, compare:
-
-nums[mid] > nums[right]
-Case 1: nums[mid] > nums[right]
-
-Example:
-
-[5,6,7,8,9,1,2,3,4]
-↑       ↑
-mid    right
-9       4
-
-Since:
-
-9 > 4
-
-the rotation point/minimum must be to the right of mid.
-
-left = mid + 1;
-Case 2: nums[mid] < nums[right]
-
-Example:
-
-[9,1,2,3,4,5,6,7,8]
-↑       ↑
-mid    right
-4       8
-
-Since:
-
-4 < 8
-
-the right half is normally sorted.
-
-The minimum could be at mid or somewhere to its left.
-
-Therefore:
-
-right = mid;
-
-⚠️ We use mid, not mid - 1, because nums[mid] itself could be the minimum.
-
-Dry Run
-Input
-nums = [5,6,7,8,9,1,2,3,4]
-Step 1
-left = 0
-right = 8
-mid = 4
+1. Calculate `mid = left + (right - left) / 2`.
+2. Compare `nums[mid]` against `nums[right]`:
+* **If `nums[mid] > nums[right]`:** The pivot/minimum lies strictly in the right half $\rightarrow$ `left = mid + 1`.
+* **If `nums[mid] < nums[right]`:** The right half is sorted; the minimum is either at `mid` or to its left $\rightarrow$ `right = mid` *(we do not use `mid - 1` because `nums[mid]` itself could be the minimum)*.
 
 
-nums[mid] = 9
-nums[right] = 4
-9 > 4
 
-Therefore:
+```text
+                        Find mid
+                           |
+             ┌─────────────┴─────────────┐
+             ▼                           ▼
+   nums[mid] > nums[right]     nums[mid] < nums[right]
+   [ Minimum in RIGHT Half ]   [ Minimum at MID or LEFT ]
+             │                           │
+             ▼                           ▼
+        left = mid + 1              right = mid
 
-left = mid + 1 = 5
+```
 
-Search space:
+---
 
-[1,2,3,4]
-↑     ↑
-left  right
-Step 2
-left = 5
-right = 8
-mid = 6
+## 🧪 4. Dry Run
 
+```text
+Input: nums = [5, 6, 7, 8, 9, 1, 2, 3, 4]
+Initial: left = 0, right = 8 -> mid = 4 (nums[mid] = 9, nums[right] = 4)
 
-nums[mid] = 2
-nums[right] = 4
-2 < 4
+1. Step 1: 9 > 4 -> Minimum is in right half.
+   Update: left = mid + 1 = 5 -> Search space: [1, 2, 3, 4] (indices 5..8).
 
-Therefore:
+2. Step 2: mid = 6 (nums[6] = 2, nums[8] = 4).
+   2 < 4 -> Minimum could be at mid or left.
+   Update: right = mid = 6 -> Search space: [1, 2] (indices 5..6).
 
-right = mid = 6
+3. Step 3: mid = 5 (nums[5] = 1, nums[6] = 2).
+   1 < 2 -> Update: right = mid = 5.
 
-Search space:
+4. Termination: left == right == 5.
+   Result: nums[5] = 1.
 
-[1,2]
-↑   ↑
-left right
-Step 3
-left = 5
-right = 6
-mid = 5
+```
 
+---
 
-nums[mid] = 1
-nums[right] = 2
-1 < 2
+## 📊 5. Complexity Analysis
 
-Therefore:
+| Metric | Complexity | Explanation |
+| --- | --- | --- |
+| **Time Complexity (TC)** | **$O(\log n)$** | Halves the active search space in every iteration. |
+| **Auxiliary Space (SC)** | **$O(1)$** | Operates in-place using only pointers (`left`, `right`, `mid`). |
 
-right = mid = 5
+---
 
-Now:
+```
 
-left = 5
-right = 5
-
-Stop.
-
-nums[left] = 1
-Answer:
-1
-TC & SC
-Time Complexity
-
-Each iteration eliminates roughly half of the search space.
-
-O(log n)
-Auxiliary Space
-
-Only left, right, and mid are used.
-
-O(1)
+```
