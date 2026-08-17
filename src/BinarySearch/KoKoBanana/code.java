@@ -52,3 +52,15 @@ public class code {
         return left;
     }
 }
+
+//TC analysis :-
+//to find the max ele - O(n)
+//    Binary search - O(log(maxpilesize))
+//Each binary-search step checks all piles: O(n)
+//
+//So total:
+//
+//O(n log(maxPile)) time
+//O(1) for no auxillary space
+
+
