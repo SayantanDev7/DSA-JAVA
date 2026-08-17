@@ -22,6 +22,33 @@ package BinarySearch.KoKoBanana;
 public class code {
 
     public int minEatingSpeed(int[] piles, int h) {
+        //here we are applying binary search not search a particular element but to find the min speed per hour for koko to eat the bananas
+        // binary search on the possible answer (eating speed).
+        // The possible speeds are:
 
+        // 1  2  3  4  5  6  7  8  9  10  11  -> This is sorted!
+        int max = piles[0];
+        for(int ele : piles){
+            if(ele > max)
+                max = ele;
+        }
+        int left = 1; //denoting min possible speed
+        int right = max; //denoting max possible speed
+        int speed;
+        while(left <= right){
+            int mid= left + (right - left) / 2; //assuming koko speed
+            int hours = 0;
+            for(int i=0;i<piles.length;i++){
+                hours += Math.ceil((double)piles[i] / mid);
+            }
+            if(hours <= h){ //mid works but try smaller speed to make koko eat slower if possible
+                right = mid - 1;
+            }
+            else { //koko is eating much slower make her faster
+                left = mid + 1;
+            }
+        }
+
+        return left;
     }
 }
