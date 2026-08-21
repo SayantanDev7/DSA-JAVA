@@ -40,6 +40,9 @@ public class code {
             int hours = 0;
             for(int i=0;i<piles.length;i++){
                 hours += Math.ceil((double)piles[i] / mid);
+                // or
+                // // Pure integer ceiling division:
+                // totalhours += (piles[i] + mid - 1) / mid;
             }
             if(hours <= h){ //mid works but try smaller speed to make koko eat slower if possible
                 right = mid - 1;
